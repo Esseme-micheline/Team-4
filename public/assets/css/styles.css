@@ -1,0 +1,36 @@
+/*--------------------------------------------------------------
+# Main
+--------------------------------------------------------------*/
+#body{
+    background: none;
+}
+#mains {
+    margin-top: 190px;
+    padding: 20px 30px;
+    transition: all 0.3s;
+  }
+
+  @media (max-width: 1199px) {
+    #mains {
+      padding: 20px;
+    }
+    .text_universite{
+        margin-top: 20px;
+        display: flex;
+        
+        justify-content: center;
+        align-items: center;
+    }
+    .univ_text{
+        margin-top: 26px;
+    }
+    .univ_logo{
+        margin-top: -20px;
+    }
+    .faculte_text{
+        margin-top: -30px;
+    }
+    #header{
+        height: 150px;
+    }
+  }
