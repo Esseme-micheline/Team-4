@@ -12,16 +12,16 @@
 
   <nav id="sidebarMenu" class="d-lg-block sidebar collapse bg-white">
     <div class="position-sticky">
-        <p>Memoires</p>
+        <p>{{ __("Memoires") }}</p>
       <div class="list-group list-group-flush mx-3 mt-4">
         <a href="{{route('visiteur.all')}}" class="list-group-item list-group-item-action py-2 ripple active">
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>@lang('Memoires Recent')</span>
+          <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>{{ __("Memoires Recent") }}</span>
         </a>
         <a href="{{route('visiteur.creer')}}" class="list-group-item list-group-item-action py-2 ripple ">
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Soummision</span>
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>{{ __("Soummision") }}</span>
         </a>
-        <a href="{{route('visiteur.creerFinale')}}" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-lock fa-fw me-3"></i><span>Code Soumission</span></a>
-        <a href="{{route('visiteur.search')}}" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-search fa-fw me-3"></i><span>Rechercher</span></a>
+        <a href="{{route('visiteur.creerFinale')}}" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-lock fa-fw me-3"></i><span>{{ __("Code Soumission") }}</span></a>
+        <a href="{{route('visiteur.search')}}" class="list-group-item list-group-item-action py-2 ripple"><i class="fas fa-search fa-fw me-3"></i><span>{{ __("Rechercher") }}</span></a>
 
         <br>
         <p>Different Categories :</p>
@@ -94,16 +94,25 @@
       <div>
         <img src="{{asset('assets/img/te-sea1.png')}}" height="50"/>
       </div>
-      <div class="d-none d-md-flex input-group w-auto my-auto">
+      <div class="d-none d-md-flex col-lg-12 col-sm-12 col-xd-12 col-md-8 input-group w-auto my-auto">
         <!-- <h4>PUBLICATION DES TRAVAUX ETUDIANTS</h4> -->
-        <h4 style="font-weight:800;padding-left:10px;color:white;">Publication Des Travaux De Recherche Scientifique Et Professionnels</h4>
+        <h4 style="font-weight:800;" class="text-white" >{{ __("Publication Des Travaux De Recherche Scientifique Et Professionnels") }}</h4>
       </div>
-      <li style="padding-top:0px; padding-left: 270px;">
-        <select style="margin-top:0px;" id="localization-switcher" class="locale-switcher  align-items-center action-btns btn text-end  d-lg-block bg-light"  >
-          <option value="fr" {{ session()->get('locale') == 'fr' ? 'selected' : '' }}>Français</option>
-          <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>Anglais</option>
-        </select>
+      
+      
+      
+      <li style="padding-top:0px; padding-left: 270px;list-style-type: none;">
+        <div class="dropdown" style="margin-top:0px; margin-left: 300px" id="localization-switcher" class="locale-switcher  align-items-center action-btns btn text-end d-sm-none d-xs-none d-lg-block bg-light">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #009688; color:white;">
+            {{ __("TRADUIRE") }}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="locale/fr">Français</a></li>
+            <li><a class="dropdown-item" href="locale/en">English</a></li>
+          </ul>
+        </div>
       </li>
+
 
       <ul class="navbar-nav ms-auto d-flex flex-row">
       </ul>

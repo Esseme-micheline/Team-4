@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\GestionSceancePresenceController;
 use App\Http\Controllers\EcoleDoctorat\UniteRechercheController;
 use App\Http\Controllers\EcoleDoctorat\EtudiantDossierController;
 use App\Http\Controllers\Visiteur\VisiteurController;
+use App\Http\Controllers\LocalizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,25 @@ use App\Http\Controllers\Visiteur\VisiteurController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from Codersvibe.com',
+        'body' => 'This is my first mail using Gmail SMTP'
+    ];
+   
+    \Mail::to('audreyesseme@gmail.com')->send(new \App\Mail\MyMail($details));
+   
+    dd("Email is Sent.");
+});
+// Route qui permet de connaître la langue active
+Route::get('locale', 'LocalizationController@getLang')->name('getlang');
+
+// Route qui permet de modifier la langue
+Route::get('locale/{lang}', [LocalizationController::class, 'setLang'])->name('setlang');
+
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create']);
 Route::get('/', [VisiteurController::class, 'index'])->name('visiteur.all');
@@ -90,7 +110,7 @@ Route::post('/ai-analysis', [VisiteurController::class, 'aiAnalysis'])->name('vi
 
 require __DIR__.'/auth.php';
 
-Route::get('Admin/User/index', [UserController::class, 'index'])->name('Admin.user.index');
+Route::get('Admin/User/index', [UserController::class, 'index'])->name('Admin.user.index'); 
 Route::post('Admin/User/store', [UserController::class, 'store'])->name('Admin.user.store');
 Route::post('Admin/User/storePassword', [UserController::class, 'storePassword'])->name('Admin.user.storePassword');
 // Route::get('Admin/User/', [UserController::class, ''])->name('Admin.user');

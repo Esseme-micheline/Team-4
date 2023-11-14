@@ -14,21 +14,21 @@
     <div>
         @foreach($projects as $doc)
         <h3 style="color:#ff8400;">{{$doc->theme}}</h3>
-        <p>{{$doc->members}} le {{$doc->created_at}}</p>
+        <p>{{$doc->members}} {{ __("le") }} {{$doc->created_at}}</p>
         <div class="card">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="bologna-list">
             <li class="nav-item">
-                <a class="nav-link active" href="#abstract{{$doc->id}}">Abstract</a>
+                <a class="nav-link active" href="#abstract{{$doc->id}}">{{ __("Abstraite") }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#authors{{$doc->id}}">Authors</a>
+                <a class="nav-link" href="#authors{{$doc->id}}">{{ __("Auteur(s)") }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#references{{$doc->id}}">Keywords</a>
+                <a class="nav-link" href="#references{{$doc->id}}">{{ __("Mot-clé") }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#download{{$doc->id}}">Download Doucument</a>
+                <a class="nav-link" href="#download{{$doc->id}}">{{ __("Telecharger le document") }}</a>
             </li>
             </ul>
         </div>
@@ -56,7 +56,7 @@
               </div>
               <div class="tab-pane" id="download{{$doc->id}}" role="tabpanel" aria-labelledby="deals-tab">
 
-                <a href="{{route('visitor.downloadPdf',['filePath'=>$doc->memoire_path,'projId'=>$doc->id])}}" class="btn btn-danger btn-sm">Telecharger Le memoire</a>
+                <a href="{{route('visitor.downloadPdf',['filePath'=>$doc->memoire_path,'projId'=>$doc->id])}}" class="btn btn-danger btn-sm">{{ __("Telecharger Le memoire") }}</a>
               </div>
             </div>
         </div>

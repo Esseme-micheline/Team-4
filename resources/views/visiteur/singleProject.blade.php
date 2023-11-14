@@ -45,7 +45,7 @@
 @section('content')
     <div class="card">
         <div class="card-header" style="display:flex;justify-content:space-between">
-            <p style="max-width:700px">Theme : <b> {{$selected->theme}} </b></p>
+            <p style="max-width:700px">{{ __("Thème") }} : <b> {{$selected->theme}} </b></p>
             <p> Date : <b>{{$selected->created_at}}</b></p>
         </div>
         <script>
@@ -68,7 +68,7 @@
             </div>
             <div> <!--Project Abstract-->
                 <div style="display:flex;justify-content:space-between">
-                    <h4>Abstract</h4>
+                    <h4>{{ __("Abstraite") }}</h4>
                     <h5>Categorie : {{$selected->domaine}}</h5>
                 </div>
                 <div>

@@ -17,11 +17,11 @@
         @csrf
         <div class="form-row">
             <div class="form-group">
-                <label for="theme">Mot-clé</label>
+                <label for="theme">{{ __("Mot-clé") }}</label>
                 <input type="text" class="form-control" id="theme" value="<?php if(isset($oldTerm)){echo $oldTerm;}?>" placeholder="Entree un mot pour faire la recherche" name="searchTerm">
             </div>
             <div class="form-group" style="padding:20px 0px;">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
+                <button type="submit" class="btn btn-primary">{{ __("Rechercher") }}</button>
             </div>
         </form>
 
@@ -30,21 +30,21 @@
         @if(count($results) > 0)
             @foreach($results as $doc)
             <h3 style="color:#ff8400;">{{$doc->theme}}</h3>
-            <p>{{$doc->members}} le {{$doc->created_at}}</p>
+            <p>{{$doc->members}} {{ __("le") }} {{$doc->created_at}}</p>
             <div class="card">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" id="bologna-list">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#abstract{{$doc->id}}">Abstract</a>
+                    <a class="nav-link active" href="#abstract{{$doc->id}}">{{ __("Abstraite") }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#authors{{$doc->id}}">Authors</a>
+                    <a class="nav-link" href="#authors{{$doc->id}}">{{ __("Auteur(s)") }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#references{{$doc->id}}">Keywords</a>
+                    <a class="nav-link" href="#references{{$doc->id}}">{{ __("Mot-clé") }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#download{{$doc->id}}">Download Doucument</a>
+                    <a class="nav-link" href="#download{{$doc->id}}">{{ __("Download Doucument") }}</a>
                 </li>
                 </ul>
             </div>
@@ -72,7 +72,7 @@
               </div>
                 <div class="tab-pane" id="download{{$doc->id}}" role="tabpanel" aria-labelledby="deals-tab">
 
-                    <a href="{{route('visitor.downloadPdf',['filePath'=>$doc->memoire_path,'projId'=>$doc->id])}}" class="btn btn-danger btn-sm">Telecharger Le memoire</a>
+                    <a href="{{route('visitor.downloadPdf',['filePath'=>$doc->memoire_path,'projId'=>$doc->id])}}" class="btn btn-danger btn-sm">{{ __("Telecharger Le memoire") }}</a>
                 </div>
                 </div>
             </div>
@@ -88,11 +88,11 @@
             </div>
             @endforeach
             @else
-                <h1 class="text-danger" align="center">Auccun resultat Trouver</h1>
+                <h1 class="text-danger" align="center">{{ __("Aucun resultat Trouver") }}</h1>
             @endif
 
         @else
-                <h1 class="text-primary" align="center">Rechercher un projet </h1>
+                <h1 class="text-primary" align="center">{{ __("Rechercher un projet") }}</h1>
         @endif
 
     </div>

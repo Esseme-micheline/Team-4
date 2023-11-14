@@ -112,7 +112,7 @@ class VisiteurController extends Controller
         $projet->members = $request->members;
         $projet->chef_telephone = $request->chefTel;
         $projet->domaine = $request->domaine;
-        // $projet->Type_projet = $request->typeProjet;
+        $projet->Type_projet = $request->typeProjet;
         // $projet->chef_matricule = $request->chefMat;
         $projet->chef_email = $request->chefMail;
         $projet->encadreur_email = $request->emailEncadreur;
@@ -130,9 +130,9 @@ class VisiteurController extends Controller
         $request->file('memoire_doc')->move(public_path("uploads/themes/{$projet->theme}/memoire"), $memoire_doc_name);
 
 
-        $attestation_doc_name = $request->file('attestation_doc')->getClientOriginalName();
-        $projet->attestation_path = $attestation_doc_name;
-        $request->file('attestation_doc')->move(public_path("uploads/themes/{$projet->theme}/attestation"), $attestation_doc_name);
+        // $attestation_doc_name = $request->file('attestation_doc')->getClientOriginalName();
+        // $projet->attestation_path = $attestation_doc_name;
+        // $request->file('attestation_doc')->move(public_path("uploads/themes/{$projet->theme}/attestation"), $attestation_doc_name);
 
         if($projet->save()){
             $request->flash("succes","Document enregistre avec success");

@@ -18,15 +18,15 @@
     @if(!isset($codeCorrect))
   <div class="row">
     <div class="form-group col-md-6">
-      <label for="chefMat">Matricule du chef du projet</label>
+      <label for="chefMat">{{ __("Matricule du chef du projet") }}</label>
       <input required type="text" class="form-control" id="chefMat" name="chefMat">
     </div>
     <div class="form-group col-md-6">
-      <label for="chefEmail">Email du chef</label>
+      <label for="chefEmail">{{ __("Email du chef") }}</label>
       <input required type="email" class="form-control" id="chefEmail" name="chefMail">
     </div>
     <div class="form-group col-md-6">
-      <label for="codeFinale">Code de soumission</label>
+      <label for="codeFinale">{{ __("Code de soumission") }}</label>
       <input required type="text" class="form-control" id="codeFinale" name="codeFinale">
     </div>
   </div>
@@ -61,7 +61,7 @@
         @if(isset($codeCorrect))
             Soummetre
         @else
-            Verifier mon Code
+            {{ __("Verifier mon Code") }}
         @endif
       </button>
   </div>
