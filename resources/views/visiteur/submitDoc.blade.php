@@ -87,7 +87,7 @@
     </div> -->
     <table class="table table-bordered" id="table">
       <tr>
-        <th style="font-size: 20px">Memoire</th>
+        <th style="font-size: 20px">{{ __("Memoire") }}</th>
         <th>Action</th>
       </tr>
       <tr>
@@ -97,7 +97,7 @@
     </table><br>
     <table class="table table-bordered" id="tables">
       <tr>
-        <th style="font-size: 20px">Liens <span style="font-size: 10px">si aucun lien, laissez le champ vide</span></th>
+        <th style="font-size: 20px">{{ __("Lien(s)") }} <span style="font-size: 10px">{{ __("si aucun lien, laissez le champ vide") }}</span></th>
         <th>Action</th>
       </tr>
       <tr>
