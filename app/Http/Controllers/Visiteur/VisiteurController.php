@@ -120,14 +120,37 @@ class VisiteurController extends Controller
         // $projet->encadreur_telephone = $request->telEncadreur;
         $projet->encadreurs = $request->encadreurs;
 
-
+        
+             // Enregistrement des fichiers dans le bon dossier
+             $memoireData = [];
+             foreach ($request->file('inputs.*.memoire') as $index => $file) {
+                 // Vérifie si un fichier a été téléchargé
+                 if ($file !== null) {
+                     // Génère un nom de fichier basé sur le nom d'origine pour chaque fichier
+                     $filename = $file->getClientOriginalName();
+                     // Déplace le fichier dans le dossier approprié
+                     $file->move(public_path("uploads/themes/{$projet->theme}/memoire"), $filename);
+                     // Stocke le nom du fichier dans le tableau
+                     $memoireData[] = $filename;
+                 }
+             }
+             $projet->memoire_path = implode(',', $memoireData);
+         
+             // Enregistrement des liens
+             $lienData = [];
+             if ($request->has('inputsl')) { // Vérifie si le mini tableau est présent dans la requête
+                 foreach ($request->inputsl as $input) {
+                     $lienData[] = $input['lien'];
+                 }
+             }
+             $projet->lien = implode(',', $lienData);
          // Send the email with the code
         // Mail::to($projet->chef_email)->send(new CodeGenerated($verification_code));
 
 
-        $memoire_doc_name = $request->file('memoire_doc')->getClientOriginalName();
-        $projet->memoire_path = $memoire_doc_name;
-        $request->file('memoire_doc')->move(public_path("uploads/themes/{$projet->theme}/memoire"), $memoire_doc_name);
+        // $memoire_doc_name = $request->file('memoire_doc')->getClientOriginalName();
+        // $projet->memoire_path = $memoire_doc_name;
+        // $request->file('memoire_doc')->move(public_path("uploads/themes/{$projet->theme}/memoire"), $memoire_doc_name);
 
 
         // $attestation_doc_name = $request->file('attestation_doc')->getClientOriginalName();

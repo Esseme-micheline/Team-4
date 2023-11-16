@@ -69,7 +69,7 @@
   <div class="row">
     <div class="form-group col-md-6">
       <label for="projectMembers">{{ __("Noms des l'encadreur") }}</label>
-      <textarea required name="encardreurs" class="form-control" id="encardreurs" rows="3"
+      <textarea required name="encadreurs" class="form-control" id="encadreurs" rows="3"
         placeholder="ex: Jhone Doe, Tristina Joe"
       ></textarea>
   </div>
@@ -81,18 +81,36 @@
 
   <div class="row">
     <p><h3>{{ __("Documents a soummetre") }}</h3></p>
-    <div class="form-group col-md-4">
+    <!-- <div class="form-group col-md-4">
       <label for="memoireDoc">{{ __("Document Memoire") }}</label>
       <input required type="file" id="memoireDoc" class="form-control" name="memoire_doc">
-    </div>
+    </div> -->
+    <table class="table table-bordered" id="table">
+      <tr>
+        <th style="font-size: 20px">Memoire</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td><input required type="file" name="inputs[0][memoire]" placeholder="Choissir un Fichier" class="form-control"></td>
+        <td><button type="button" name="addFile" id="addFile" class="btn btn-success">+</button></td>
+      </tr>
+    </table><br>
+    <table class="table table-bordered" id="tables">
+      <tr>
+        <th style="font-size: 20px">Liens <span style="font-size: 10px">si aucun lien, laissez le champ vide</span></th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td><input type="text" name="inputsl[0][lien]" placeholder="Entrer votre lien" class="form-control"></td>
+        <td><button type="button" name="addLien" id="addLien" class="btn btn-success">+</button></td>
+      </tr>
+    </table>
   </div>
 
   <div class="form-group" style="padding:20px 0px;">
 
       <button type="submit" class="btn btn-primary">{{ __("Soummetre") }}</button>
   </div>
-  <script>
-    
-  </script>
+
 </form>
 @endsection
