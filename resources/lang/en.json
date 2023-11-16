@@ -29,6 +29,9 @@
     "Telecharger le document" : "Download Document",
     "Telecharger Le memoire" : "Download Document",
     "le" : "On the",
-    "Professionel" : "Professional",
-    " Recherche" : " Recherche"
+    "Memoire" : "Memory",
+    "Lien(s)" : "link(s)",
+    "si aucun lien, laissez le champ vide" : "If no link, leave empty field",
+    "Choissir un Fichier" : "Choose a file",
+    "Entrer votre lien" : "Enter your link(s)"
 }

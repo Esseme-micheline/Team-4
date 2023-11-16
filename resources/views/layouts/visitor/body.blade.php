@@ -198,6 +198,42 @@ function closeNav() {
 </style>
     @yield('scripts')
 
+
+    <script>
+    var i = 0;
+    var j = 0;
+    $('#addFile').click(function(){
+      ++i;
+      $('#table').append(
+        `<tr>
+            <td>
+              <input type="file" name="inputs[`+i+`][memoire]" placeholder="Choissir un fichier" class="form-control"/>
+            </td>
+            <td>
+             <button type="button" class="btn btn-danger remove-table-row">-</button>
+            </td>
+        </tr>`);
+    });
+
+    $('#addLien').click(function(){
+      ++j;
+      $('#tables').append(
+        `<tr>
+            <td>
+              <input type="text" name="inputsl[`+j+`][lien]" placeholder="Entrer votre lien" class="form-control"/>
+            </td>
+            <td>
+             <button type="button" class="btn btn-danger remove-table-row">-</button>
+            </td>
+        </tr>`);
+    });
+
+    $(document).on('click','.remove-table-row', function(){
+      $(this).parents('tr').remove();
+    })
+
+  </script> 
+
 </body>
 
 </html>
