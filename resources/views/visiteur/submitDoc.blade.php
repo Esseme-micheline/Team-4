@@ -42,13 +42,13 @@
     <div class="form-check">
   <input class="form-check-input" type="radio" name="typeProjet" id="typeProjet" value="Professionnel">
   <label class="form-check-label" for="flexRadioDefault1">
-    Professionel
+    {{ __("Professionel") }}
   </label>
  </div>
  <div class="form-check">
   <input class="form-check-input" type="radio" name="typeProjet" id="typeProjet" checked value="Recherche">
   <label class="form-check-label" for="flexRadioDefault2">
-    Recherche
+    {{ __("Recherche") }}
   </label>
  </div>
   </div>
