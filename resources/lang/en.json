@@ -29,9 +29,13 @@
     "Telecharger le document" : "Download Document",
     "Telecharger Le memoire" : "Download Document",
     "le" : "On the",
+    "Type du Projet" : "Type of Project",
     "Memoire" : "Memory",
     "Lien(s)" : "link(s)",
     "si aucun lien, laissez le champ vide" : "If no link, leave empty field",
     "Choissir un Fichier" : "Choose a file",
-    "Entrer votre lien" : "Enter your link(s)"
+    "Entrer votre lien" : "Enter your link(s)",
+    "Professionel" : "Professional",
+    "Recherche" : "Recherche",
+    "Votre Theme" : "Your theme"
 }

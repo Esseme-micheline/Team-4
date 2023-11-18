@@ -31,6 +31,7 @@ use App\Http\Controllers\EcoleDoctorat\UniteRechercheController;
 use App\Http\Controllers\EcoleDoctorat\EtudiantDossierController;
 use App\Http\Controllers\Visiteur\VisiteurController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\EtudiantController;
 
 /*
 |--------------------------------------------------------------------------

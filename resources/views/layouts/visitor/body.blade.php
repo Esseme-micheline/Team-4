@@ -61,10 +61,33 @@
     --mdb-btn-box-shadow: 0 4px 9px -4px #008374;
    
   }
+  .btn-success {
+    --mdb-btn-bg: #008374;
+    --mdb-btn-color: #fff;
+    --mdb-btn-box-shadow: 0 4px 9px -4px #008374;
+    --mdb-btn-hover-bg: #008374;
+    --mdb-btn-hover-color: #fff;
+    --mdb-btn-focus-bg: #008374;
+    --mdb-btn-focus-color: #fff;
+    --mdb-btn-active-bg: ##008374;
+    --mdb-btn-active-color: #fff;
+    --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(20,164,77,0.3),0 4px 18px 0 rgba(20,164,77,0.2);
+}
+.btn-danger {
+    --mdb-btn-bg: #ff8400;
+    --mdb-btn-color: #fff;
+    --mdb-btn-box-shadow: 0 4px 9px -4px #ff8400;
+    --mdb-btn-hover-bg: #ff8400;
+    --mdb-btn-hover-color: #fff;
+    --mdb-btn-focus-bg: #ff8400;
+    --mdb-btn-focus-color: #fff;
+    --mdb-btn-active-bg: #ff8400;
+    --mdb-btn-active-color: #fff;
+    --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(220,76,100,0.3),0 4px 18px 0 rgba(220,76,100,0.2);
+}
   :root{
     --mdb-primary: #ff8400;
     --mdb-primary-rgb: 0,131,116;
-    /* --mdb-primary-rgb: 255,132,0; */
   }
   .back-to-top{
     background:#008374;

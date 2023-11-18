@@ -110,10 +110,10 @@ class VisiteurController extends Controller
         $projet->theme = $request->projet_theme;
         $projet->abstract = $request->projet_abstract;
         $projet->members = $request->members;
-        $projet->chef_telephone = $request->chefTel;
+        // $projet->chef_telephone = $request->chefTel;
         $projet->domaine = $request->domaine;
         $projet->Type_projet = $request->typeProjet;
-        // $projet->chef_matricule = $request->chefMat;
+        $projet->mots = $request->mots;
         $projet->chef_email = $request->chefMail;
         $projet->encadreur_email = $request->emailEncadreur;
         // $projet->encadreur_matricule = $request->matriculeEncadreur;
