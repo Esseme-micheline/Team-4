@@ -11,6 +11,14 @@
         return array_keys(array_slice($wordCountArr, 0, 10));
       }
 ?>
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+
     <div>
         @foreach($projects as $doc)
         <h3 style="color:#ff8400;">{{$doc->theme}}</h3>

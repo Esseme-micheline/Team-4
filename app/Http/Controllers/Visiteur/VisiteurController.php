@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Visiteur;
 
+use App\Models\Etudiant\Etudiant;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Visiteur\Projets;
@@ -120,30 +123,56 @@ class VisiteurController extends Controller
         // $projet->encadreur_telephone = $request->telEncadreur;
         $projet->encadreurs = $request->encadreurs;
 
-        
+        $memoire_doc_name = $request->file('memoire_doc')->getClientOriginalName();
+        $projet->memoire_path = $memoire_doc_name;
+        $request->file('memoire_doc')->move(public_path("uploads/themes/{$projet->theme}/memoire"), $memoire_doc_name);
+
+        $projet->lien = $request->lien_doc;
+
              // Enregistrement des fichiers dans le bon dossier
-             $memoireData = [];
-             foreach ($request->file('inputs.*.memoire') as $index => $file) {
-                 // Vérifie si un fichier a été téléchargé
-                 if ($file !== null) {
-                     // Génère un nom de fichier basé sur le nom d'origine pour chaque fichier
-                     $filename = $file->getClientOriginalName();
-                     // Déplace le fichier dans le dossier approprié
-                     $file->move(public_path("uploads/themes/{$projet->theme}/memoire"), $filename);
-                     // Stocke le nom du fichier dans le tableau
-                     $memoireData[] = $filename;
-                 }
-             }
-             $projet->memoire_path = implode(',', $memoireData);
+            //  $memoireData = [];
+            //  foreach ($request->file('inputs.*.memoire') as $index => $file) {
+            //      // Vérifie si un fichier a été téléchargé
+            //      if ($file !== null) {
+            //          // Génère un nom de fichier basé sur le nom d'origine pour chaque fichier
+            //          $filename = $file->getClientOriginalName();
+            //          // Déplace le fichier dans le dossier approprié
+            //          $file->move(public_path("uploads/themes/{$projet->theme}/memoire"), $filename);
+            //          // Stocke le nom du fichier dans le tableau
+            //          $memoireData[] = $filename;
+            //      }
+            //  }
+            //  $projet->memoire_path = implode(',', $memoireData);
          
-             // Enregistrement des liens
-             $lienData = [];
-             if ($request->has('inputsl')) { // Vérifie si le mini tableau est présent dans la requête
-                 foreach ($request->inputsl as $input) {
-                     $lienData[] = $input['lien'];
+            //  // Enregistrement des liens
+            //  $lienData = [];
+            //  if ($request->has('inputsl')) { // Vérifie si le mini tableau est présent dans la requête
+            //      foreach ($request->inputsl as $input) {
+            //          $lienData[] = $input['lien'];
+            //      }
+            //  }
+            //  $projet->lien = implode(',', $lienData);
+
+             $matricules = explode(',', $request->verificationCode);
+             $missingMatricules = [];
+         
+             foreach ($matricules as $matricule) {
+                 $matricule = trim($matricule); // Supprimer les espaces au début et à la fin
+                 $matriculeExists = DB::table('etudiant')->where('matricule', $matricule)->exists();
+                 if (!$matriculeExists) {
+                     $missingMatricules[] = $matricule;
                  }
              }
-             $projet->lien = implode(',', $lienData);
+         
+             if (!empty($missingMatricules)) {
+                 $errorMessage = 'Les matricules suivants ne sont pas présents dans la table étudiant : ' . implode(', ', $missingMatricules);
+                 return redirect()->back()->with('error', $errorMessage);
+             }
+         
+             // Affichage du message de succès
+             $request->session()->flash('success', 'Votre document a été prit en compte, vous recevrez plus de détail par Mail.');
+         
+
          // Send the email with the code
         // Mail::to($projet->chef_email)->send(new CodeGenerated($verification_code));
 

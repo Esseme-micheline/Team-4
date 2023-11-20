@@ -222,7 +222,7 @@ function closeNav() {
     @yield('scripts')
 
 
-    <script>
+    <!-- <script>
     var i = 0;
     var j = 0;
     $('#addFile').click(function(){
@@ -255,7 +255,7 @@ function closeNav() {
       $(this).parents('tr').remove();
     })
 
-  </script> 
+  </script>  -->
 
 </body>
 
