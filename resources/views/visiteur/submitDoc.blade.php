@@ -12,12 +12,12 @@
     </div>
    @endif
   <div class="form-row">
-    <div class="form-group" style="font-size: bold;">
-      <h1>{{ __("SOUMISSION") }}</h1> 
+    <div class="form-group" style="font-size: bold; color: #ff8400">
+      <h1 style="font-size: 50px;">{{ __("SOUMISSION") }}</h1> 
     </div><br><br>
-    <h1 style="font-size: 22px; font-style:italic; font-weight:bold;">{{ __("Detail du projet") }}</h1>
+    <p style="font-weight: bold;">{{ __("Detail du projet") }}</p>
     <div>
-      <div style="border: 2px solid; padding: 70px; box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 20px; margin-bottom: 40px;">
+      <div style="border: 2px solid rgb(185, 184, 184); padding: 70px; box-shadow: 2px 2px 4px rgb(70, 69, 69); margin-bottom: 40px;">
           <div class="form-group">
               <label for="theme">{{ __("Thème") }}</label>
               <input required type="text" class="form-control" id="theme" placeholder="{{ __("Votre Theme") }}" name="projet_theme" style="border: none; box-shadow: none; border-radius: 0; border-bottom: 1px solid;" >
@@ -37,37 +37,37 @@
       </div>
   </div>
   
-  <h1 style="font-size: 22px; font-style:italic; font-weight:bold;">{{ __("Detail des auteurs") }}</h1>
-  <div style="border: 2px solid; padding: 70px; box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 20px;  margin-bottom: 40px;">
+  <p style="font-weight: bold;">{{ __("Detail des auteurs") }}</p>
+  <div style="border: 2px solid rgb(185, 184, 184); padding: 70px; box-shadow: 2px 2px 4px rgb(70, 69, 69); margin-bottom: 40px;">
     <div class="row">
       <div class="row">
         <div class="col-md-6">
-          <div>
+          <div >
             <div class="form-group col-md-12">
               <label for="projectMembers">{{ __("Les membres du groupe") }} <span style="color: red;">*</span></label>
               <textarea required name="members" class="form-control" id="projectMembers" rows="3"
                 placeholder="ex: Jhone Doe, Tristina Joe"
-                style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 10px;"></textarea>
+                style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border: 2px solid;"></textarea>
             </div><br>
             <div class="form-group col-md-12">
               <label for="projectMembers">{{ __("Noms des encadreurs") }} <span style="color: red;">*</span></label>
               <textarea required name="encadreurs" class="form-control" id="encadreurs" rows="3"
                 placeholder="ex: Jhone Doe, Tristina Joe"
-                style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 10px;"></textarea>
+                style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border: 2px solid;"></textarea>
             </div>
           </div>
         </div>
       
         <div class="col-md-6">
           <div>
-            <div class="form-group col-md-12" style="height: 150px">
+            <div class="form-group col-md-12" style="height: 140px">
               <label for="chefEmail">{{ __("Email des membres du groupe") }} <span style="color: red;">*</span></label>
-              <textarea required class="form-control" id="chefEmail" name="chefMail" placeholder="Ex : email1@example.com, email2@example.com" style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 5px;"></textarea>
+              <textarea required class="form-control" id="chefEmail" name="chefMail" placeholder="Ex : email1@example.com, email2@example.com" style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border: 2px solid; height:85px;"></textarea>
             </div>
            
             <div class="form-group col-md-12">
-              <label for="emailEncadreur">{{ __("Email des encadreurs") }} <span style="color: red;">*</span></label>
-              <textarea required class="form-control" id="emailEncadreur" name="emailEncadreur" placeholder="Ex : email1@example.com, email2@example.com" style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 5px;"></textarea>
+              <label for="emailEncadreur">{{ __("Email des encadreurs") }}</label>
+              <textarea required class="form-control" id="emailEncadreur" name="emailEncadreur" placeholder="Ex : email1@example.com, email2@example.com" style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border: 2px solid; height:85px;"></textarea>
             </div>
           </div>
         </div>
@@ -75,12 +75,12 @@
     </div>
   </div>
   <div class="row">
-    <h1 style="font-size: 22px; font-style:italic; font-weight:bold;">{{ __("Document(s)") }}</h1>
-    <div style="border: 2px solid; padding: 70px; box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 20px; margin-bottom: 40px;">
+    <p style="font-weight: bold;">{{ __("Document(s)") }}</p>
+    <div style="border: 2px solid rgb(185, 184, 184); padding: 70px; box-shadow: 2px 2px 4px rgb(70, 69, 69);  margin-bottom: 40px;">
       <div class="col-md-12">
         {{-- <h3>{{ __("Documents à soumettre") }}</h3> --}}
         <div class="form-group">
-              <label for="theme">{{ __("Mémoire") }}</label>
+              <label for="theme">{{ __("Mémoire") }} <span style="color: red;">*</span></label>
               <input required type="file" class="form-control" id="memoire_doc" placeholder="{{ __("Choisir un Fichier") }}" name="memoire_doc" style="border: none; box-shadow: none; border-radius: 0; border-bottom: 1px solid;" >
           </div><br>
           <div class="form-group">
@@ -111,15 +111,36 @@
       </div>
 
 <div class="row">
-  <div class="form-group col-md-6">
-    <label for="domain">{{ __("Domaine") }}</label>
+  <div class="form-group col-md-12" style="margin-bottom: 40px">
+    <label for="domain">{{ __("Domaine") }}<span style="color: red;">*</span></label>
     <select required class="form-control" name="domaine" id="domaine">
       @foreach($domaines as $dom)
           <option value="{{$dom}}">{{$dom}}</option>
       @endforeach
     </select>
+  </div><br><br>
+  <div class="form-group row">
+  <label for="type" class="col-md-4 col-form-label">{{ __("Type du Projet") }} <span style="color: red;">*</span></label>
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="typeProjet" id="typeProjet1" value="Professionnel">
+      <label class="form-check-label" for="typeProjet1">
+        {{ __("Professionnel") }}
+      </label>
+    </div>
   </div>
-  <div class="form-group col-md-6">
+  <div class="col-md-4">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="typeProjet" id="typeProjet2" checked value="Recherche">
+      <label class="form-check-label" for="typeProjet2">
+        {{ __("Recherche") }}
+      </label>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  {{-- <div class="form-group col-md-6">
     <label for="type" class="col-form-label">{{ __("Type du Projet : ") }}</label>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="typeProjet" id="typeProjet1" value="Professionnel">
@@ -135,7 +156,7 @@
     </div>
   </div>
   </div>
-</div>
+</div> --}}
   
   
 <div class="row">
@@ -151,14 +172,14 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="verificationCode">Code de vérification<span style="color: red;">*</span></label></label>
-        <textarea style="box-shadow: 2px 2px 4px rgb(70, 69, 69); border-radius: 10px;" class="form-control" id="verificationCode" name="verificationCode" placeholder="Ex : 21Q2324, 21T3546" required></textarea>
+        <textarea style="box-shadow: 2px 2px 4px rgb(70, 69, 69);" class="form-control" id="verificationCode" name="verificationCode" placeholder="Ex : 21Q2324, 21T3546" required></textarea>
       </div>
     </div>
   </div>
 
-  <div class="form-group" style="padding:20px 0px;">
+  <div class="form-group" style="padding:20px 0px; margin-right: 750px;">
 
-      <button type="submit" class="btn btn-primary">{{ __("Soummetre") }}</button>
+      <button type="submit" class="btn btn-primary" style= "margin-left: 90%;">{{ __("Soummetre") }}</button>
   </div>
 
 </form>
