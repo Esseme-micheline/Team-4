@@ -11,17 +11,31 @@
             <li class="nav-item">
                 <a class="nav-link" href="#authors">Authors</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#mots">Mots clés</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#encadreurs">Encadreurs</a>
+            </li>
             </ul>
         </div>
         <div class="card-body">
-        <div class="tab-content mt-3">
-              <div class="tab-pane active" id="abstract" role="tabpanel">
-                <p class="card-text">{{$selectedProject->abstract}}</p>
-              </div>
+            <div class="tab-content mt-3">
+                <div class="tab-pane active" id="abstract" role="tabpanel">
+                    <p class="card-text">{{$selectedProject->abstract}}</p>
+                </div>
 
-              <div class="tab-pane" id="authors" role="tabpanel" aria-labelledby="history-tab">
-                <p class="card-text">{{$selectedProject->members}}</p>
-              </div>
+                <div class="tab-pane" id="authors" role="tabpanel" aria-labelledby="history-tab">
+                    <p class="card-text">{{$selectedProject->members}}</p>
+                </div>
+
+                <div class="tab-pane" id="mots" role="tabpanel" aria-labelledby="history-tab">
+                    <p class="card-text">{{$selectedProject->mots}}</p>
+                </div>
+
+                <div class="tab-pane" id="encadreurs" role="tabpanel" aria-labelledby="history-tab">
+                    <p class="card-text">{{$selectedProject->encadreurs}}</p>
+                </div>
 
             </div>
         </div>
@@ -29,7 +43,7 @@
             <p>{{$selectedProject->created_at}}</p>
         </div>
         </div>
-    <div style="margin:100px 0px; background-color:white; padding:20px 20px; border-radius:10px;box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);">
+    {{-- <div style="margin:100px 0px; background-color:white; padding:20px 20px; border-radius:10px;box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);">
         <h1 align="center" style="margin:20px 0px">Attestation de soutenance</h1>
         <div>
             @if($selectedProject->is_valid == 3)
@@ -39,7 +53,7 @@
             @endif
 
         </div>
-    </div>
+    </div> --}}
 
     <div style="margin:100px 0px; background-color:white; padding:20px 20px; border-radius:10px;box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);">
         <h1 align="center" style="margin:20px 0px">Document Memoire</h1>
@@ -54,7 +68,7 @@
         </div>
     </div>
     <div>
-    <p class="text-primary"> - Evaluer la formation et structure du document</p>
+    <p class="text-primary"> - Evaluer la formation et structure du document<span style="color: red;">*</span></p>
     <h4 align="center" class="text-info">Je confirme avoir examiné et m'être assuré que les documents ci-dessus sont authentiques et corrects </h4>
     <div style="display:flex;gap:30px;">
     <form method="POST" action="{{ route('Ecole_Doctorat.dossier.actions.valider', $selectedProject->id) }}" style="width:100%">

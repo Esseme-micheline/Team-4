@@ -61,6 +61,10 @@
     --mdb-btn-box-shadow: 0 4px 9px -4px #008374;
    
   }
+  .back-to-top:hover {
+    background: #ff8400;
+    color: #fff;
+}
   .btn-success {
     --mdb-btn-bg: #008374;
     --mdb-btn-color: #fff;
@@ -165,6 +169,7 @@ element.style {
     --mdb-btn-active-color: #fff;
     --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(59,113,202,0.3),0 4px 18px 0 rgba(59,113,202,0.2);
 }
+
   :root{
     --mdb-primary: #ff8400;
     --mdb-primary-rgb: 0,131,116;

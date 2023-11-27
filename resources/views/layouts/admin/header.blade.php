@@ -1,13 +1,16 @@
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('Admin.index') }}" class="logo d-flex align-items-center">
-            <img src="{{ asset('assets/img/Blason_univ_Yaoundé_1.png') }}" alt="logo de l'UY1" srcset="">
-            <span class="d-none d-lg-block">Gestion <span style="color: #000">Etudiant</span> </span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+       <div>
+        <img src="{{asset('assets/img/te-sea1.png')}}" height="50"/>
+      </div>
+      <div class="d-none d-md-flex col-lg-12 col-sm-12 col-xd-12 col-md-8 input-group w-auto my-auto">
+        <!-- <h4>PUBLICATION DES TRAVAUX ETUDIANTS</h4> -->
+        <h4 style="font-weight:800;" class="text-white" >{{ __("Publication Des Travaux De Recherche Scientifique Et Professionnels") }}</h4>
+      </div><!-- End Logo -->
+
+     
+
 
     {{-- <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="POST" action="#">
@@ -53,6 +56,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
+                   
 {{--
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">

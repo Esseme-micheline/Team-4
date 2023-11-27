@@ -2,6 +2,7 @@
 <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
+      
         @if (Auth::user()->profil_id != 1)
             <li class="nav-item">
                 <a class="nav-link @if (!isset($admin_i)) collapsed @endif" href="{{ route('Admin.index') }}">
@@ -268,6 +269,7 @@
                 <span>Profile</span>
             </a>
         </li>
+    
         @if (Auth::user()->profil_id == 0 || Auth::user()->profil_id == 2 || Auth::user()->profil_id == 4)
             <li class="nav-item">
                 <a class="nav-link @if (!isset($utilisateur_c)) collapsed @endif "
@@ -284,7 +286,6 @@
                 </a>
             </li>
         @endif
-
 
 
     </ul>

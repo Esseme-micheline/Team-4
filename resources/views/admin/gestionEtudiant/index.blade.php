@@ -114,7 +114,7 @@
 
                                     <div class="col-6">
                                         <button type="submit" class="btn text-light"
-                                            style="background: #012970;">Filtrer</button>
+                                            style="background: #008374;">Filtrer</button>
                                     </div>
                                 </form>
                             </div>
