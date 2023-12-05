@@ -81,6 +81,8 @@
         @endforeach
     </div>
 
+    {{$projects->onEachSide(1)->links()}}
+
     <style>
         div.keywords-box{
             display: grid;
