@@ -29,7 +29,7 @@ class VisiteurController extends Controller
     //    $config = config('global.constants.domaines');
 
     //     return $config;
-        $projets = Projets::where('is_valid',1)->get();
+        $projets = Projets::where('is_valid',1)->paginate(3);
         return view('visiteur.viewAllDocs')->with('projects',$projets);
     }
     public function getCate($domaine)
