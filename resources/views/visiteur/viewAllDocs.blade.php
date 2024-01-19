@@ -87,7 +87,7 @@
         div.keywords-box{
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-        }
+         }
         p.single-keyword{
             border: none;
             color: white;

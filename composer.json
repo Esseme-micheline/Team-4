@@ -9,6 +9,7 @@
         "barryvdh/laravel-dompdf": "^2.0",
         "brian2694/laravel-toastr": "^5.57",
         "elgibor-solution/laravel-database-encryption": "^1.1",
+        "elibyy/tcpdf-laravel": "^10.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.7",
         "laravel/breeze": "1.9.2",
@@ -17,8 +18,10 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "maatwebsite/excel": "^1.1",
+        "setasign/fpdi-fpdf": "^2.3",
         "smalot/pdfparser": "^2.5",
-        "spatie/simple-excel": "^1.13"
+        "spatie/simple-excel": "^1.13",
+        "tecnickcom/tcpdf": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
