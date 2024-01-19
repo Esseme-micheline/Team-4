@@ -20,8 +20,7 @@
         "maatwebsite/excel": "^1.1",
         "setasign/fpdi-fpdf": "^2.3",
         "smalot/pdfparser": "^2.5",
-        "spatie/simple-excel": "^1.13",
-        "tecnickcom/tcpdf": "*"
+        "spatie/simple-excel": "^1.13"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
