@@ -4,7 +4,7 @@
     $typeProjet = config('global.constants.typeProjet');
 ?>
 @section('content')
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data"  onsubmit="return validateForm()">
     @csrf
     @if(session('error'))
     <div class="alert alert-danger">
@@ -181,6 +181,46 @@
 
       <button type="submit" class="btn btn-primary" style= "margin-left: 90%;">{{ __("Soummetre") }}</button>
   </div>
+
+
+<script>
+  function validateForm() {
+      
+      // Validation des adresses e-mail des membres
+      var membersEmail = document.getElementById("chefEmail").value;
+      if (!validateEmails(membersEmail)) {
+          alert("Veuillez entrer des adresses e-mail valides pour les membres.");
+          return false; 
+      }
+
+      // Validation des adresses e-mail des encadreurs
+      var encadreursEmail = document.getElementById("emailEncadreur").value;
+      if (!validateEmails(encadreursEmail)) {
+          alert("Veuillez entrer des adresses e-mail valides pour les encadreurs.");
+          return false; 
+      }
+
+      return true; // Autoriser la soumission du formulaire
+  }
+
+  // Fonction pour valider les adresses e-mail séparées par des virgules
+  function validateEmails(emails) {
+      var emailArray = emails.split(",");
+      for (var i = 0; i < emailArray.length; i++) {
+          var email = emailArray[i].trim();
+          if (!isValidEmail(email)) {
+              return false;
+          }
+      }
+      return true;
+  }
+
+  // Fonction pour valider une seule adresse e-mail
+  function isValidEmail(email) {
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+  }
+</script>
 
 </form>
 @endsection

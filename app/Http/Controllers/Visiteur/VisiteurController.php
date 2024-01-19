@@ -105,96 +105,69 @@ class VisiteurController extends Controller
      */
     public function store(Request $request)
     {
-        //the part that get the chef matricule and generated a code base on the matricule
-
-
+        // Create a new project instance
         $projet = new Projets();
-
+    
+        // Assign values to project attributes from the request data
         $projet->theme = $request->projet_theme;
         $projet->abstract = $request->projet_abstract;
         $projet->members = $request->members;
-        // $projet->chef_telephone = $request->chefTel;
         $projet->domaine = $request->domaine;
         $projet->Type_projet = $request->typeProjet;
         $projet->mots = $request->mots;
         $projet->chef_email = $request->chefMail;
         $projet->encadreur_email = $request->emailEncadreur;
-        // $projet->encadreur_matricule = $request->matriculeEncadreur;
-        // $projet->encadreur_telephone = $request->telEncadreur;
         $projet->encadreurs = $request->encadreurs;
-
-        $memoire_doc_name = $request->file('memoire_doc')->getClientOriginalName();
-        $projet->memoire_path = $memoire_doc_name;
-        $request->file('memoire_doc')->move(public_path("uploads/themes/{$projet->theme}/memoire"), $memoire_doc_name);
-
-        $projet->lien = $request->lien_doc;
-
-             // Enregistrement des fichiers dans le bon dossier
-            //  $memoireData = [];
-            //  foreach ($request->file('inputs.*.memoire') as $index => $file) {
-            //      // Vérifie si un fichier a été téléchargé
-            //      if ($file !== null) {
-            //          // Génère un nom de fichier basé sur le nom d'origine pour chaque fichier
-            //          $filename = $file->getClientOriginalName();
-            //          // Déplace le fichier dans le dossier approprié
-            //          $file->move(public_path("uploads/themes/{$projet->theme}/memoire"), $filename);
-            //          // Stocke le nom du fichier dans le tableau
-            //          $memoireData[] = $filename;
-            //      }
-            //  }
-            //  $projet->memoire_path = implode(',', $memoireData);
-         
-            //  // Enregistrement des liens
-            //  $lienData = [];
-            //  if ($request->has('inputsl')) { // Vérifie si le mini tableau est présent dans la requête
-            //      foreach ($request->inputsl as $input) {
-            //          $lienData[] = $input['lien'];
-            //      }
-            //  }
-            //  $projet->lien = implode(',', $lienData);
-
-             $matricules = explode(',', $request->verificationCode);
-             $missingMatricules = [];
-         
-             foreach ($matricules as $matricule) {
-                 $matricule = trim($matricule); // Supprimer les espaces au début et à la fin
-                 $matriculeExists = DB::table('etudiant')->where('matricule', $matricule)->exists();
-                 if (!$matriculeExists) {
-                     $missingMatricules[] = $matricule;
-                 }
-             }
-         
-             if (!empty($missingMatricules)) {
-                 $errorMessage = 'Les matricules suivants ne sont pas présents dans la table étudiant : ' . implode(', ', $missingMatricules);
-                 return redirect()->back()->with('error', $errorMessage);
-             }
-         
-             // Affichage du message de succès
-             $request->session()->flash('success', 'Votre document a été prit en compte, vous recevrez plus de détail par Mail.');
-         
-
-         // Send the email with the code
-        // Mail::to($projet->chef_email)->send(new CodeGenerated($verification_code));
-
-
-        // $memoire_doc_name = $request->file('memoire_doc')->getClientOriginalName();
-        // $projet->memoire_path = $memoire_doc_name;
-        // $request->file('memoire_doc')->move(public_path("uploads/themes/{$projet->theme}/memoire"), $memoire_doc_name);
-
-
-        // $attestation_doc_name = $request->file('attestation_doc')->getClientOriginalName();
-        // $projet->attestation_path = $attestation_doc_name;
-        // $request->file('attestation_doc')->move(public_path("uploads/themes/{$projet->theme}/attestation"), $attestation_doc_name);
-
-        if($projet->save()){
-            $request->flash("succes","Document enregistre avec success");
-            return redirect()->route('visiteur.all');
-
+    
+        // Handle file uploads (memoire_doc) with PDF verification:
+        $memoire_doc = $request->file('memoire_doc');
+    
+        // Verify that the uploaded file is a PDF
+        if ($memoire_doc->getClientOriginalExtension() !== 'pdf') {
+            return redirect()->back()->with('error', 'Le document doit être au format PDF.');
         }
-        else redirect()->back();
-
-
+    
+        $memoire_doc_name = $memoire_doc->getClientOriginalName();
+        $projet->memoire_path = $memoire_doc_name;
+    
+        // Move the file to the specified directory
+        $memoire_doc->move(public_path("uploads/themes/{$projet->theme}/memoire"), $memoire_doc_name);
+    
+        $projet->lien = $request->lien_doc;
+    
+        // Check and validate matricules
+        $matricules = explode(',', $request->verificationCode);
+        $missingMatricules = [];
+    
+        foreach ($matricules as $matricule) {
+            $matricule = trim($matricule);
+            $matriculeExists = DB::table('etudiant')->where('matricule', $matricule)->exists();
+            if (!$matriculeExists) {
+                $missingMatricules[] = $matricule;
+            }
+        }
+    
+        if (!empty($missingMatricules)) {
+            $errorMessage = 'Les matricules suivants ne sont pas présents dans la table étudiant : ' . implode(', ', $missingMatricules);
+            return redirect()->back()->with('error', $errorMessage);
+        }
+    
+        // Display success message
+        $request->session()->flash('success', 'Votre document a été pris en compte, vous recevrez plus de détails par Mail.');
+    
+        // Send the email with the code
+        // Mail::to($projet->chef_email)->send(new CodeGenerated($verification_code));
+    
+        // Save the project data and display success/error messages
+        if ($projet->save()) {
+            $request->flash("succes", "Document enregistré avec succès");
+            return redirect()->route('visiteur.all');
+        } else {
+            return redirect()->back();
+        }
     }
+    
+    
 
     /**
      * Display the specified resource.

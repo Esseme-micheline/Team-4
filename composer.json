@@ -18,7 +18,9 @@
         "laravel/ui": "^3.4",
         "maatwebsite/excel": "^1.1",
         "smalot/pdfparser": "^2.5",
-        "spatie/simple-excel": "^1.13"
+        "spatie/pdf-to-image": "^1.2",
+        "spatie/simple-excel": "^1.13",
+        "tecnickcom/tcpdf": "^7.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

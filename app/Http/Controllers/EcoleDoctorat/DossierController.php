@@ -37,7 +37,6 @@ class DossierController extends Controller
         ]);
         //The view fot this is found in dossier/index.blade.php
     }
-    //Str::random(number); To generate random unique code
     public function show($id)
     {
         $selectedProject = Projets::where('id',$id)->first();
@@ -46,54 +45,7 @@ class DossierController extends Controller
             'selectedProject'=>$selectedProject
         ]);
     }
-    // public function valider($id, Request $request){
-    //     $selectedDossier = Projets::where('id', $id)->first();
-    
-    //     $data = array();
-    //     $data['originalite'] = $request->originalite;
-    //     $data['presentation'] = $request->presentation;
-    //     $data['applicabilite'] = $request->applicabilite;
-    //     $data['rec'] = $request->rec;
-    //     $data['theme'] = $selectedDossier->theme;
-    //     $data['authors'] = $selectedDossier->chef_email;
-    //     $data['comments'] = $request->comments;
-    
-    //     if($selectedDossier->is_valid == 1){
-    //         $request->session()->flash('erreur',"Ce projet a déjà été validé!!");
-    //         return redirect()->route('Ecole_Doctorat.dossier.index');
-    //     }
-    
-    //     $selectedDossier->is_valid = 1;
-    //     $selectedDossier->checked_by = Auth::user()->email;
-    
-    //     try {
-    //         $pdfFile = PDF::loadView('email.reviewForm', compact('data'));
-    
-    //         // Send emails to group members
-    //         $membersEmails = explode(",", $selectedDossier->chef_email);
-    //         foreach ($membersEmails as $memberEmail) {
-    //             Mail::to(trim($memberEmail))->send(new CodeGenerated(null, "validated", $pdfFile));
-    //         }
-    
-    //         // Send email to encadreur if email exists
-    //         if (!empty($selectedDossier->encardreur_email)) {
-    //             Mail::to(trim($selectedDossier->encardreur_email))->send(new CodeGenerated(null, "validated", $pdfFile));
-    //         }
-    
-    //     } catch (\Exception $e) {
-    //         dd($e->getMessage());
-    //     }
-    
-    //     // Save changes to the project
-    //     $selectedDossier->save();
-    
-    //     // Save PDF to storage
-    //     $content = $pdfFile->download()->getOriginalContent();
-    //     Storage::put("public/ReviewForms/{$selectedDossier->theme}/{$selectedDossier->theme}.pdf", $content);
-    
-    //     $request->session()->flash('success', "Le projet a été validé et un courriel envoyé à l'étudiant");
-    //     return redirect()->route('Ecole_Doctorat.dossier.index');
-    // }
+
     
     public function valider($id, Request $request){
         $selectedDossier = Projets::where('id',$id)->first();
@@ -122,11 +74,12 @@ class DossierController extends Controller
             $tab = explode(",", $selectedDossier->chef_email);
         
             foreach ($tab as $selected) {
+                $selected = trim($selected);
                 Mail::to($selected)->send(new CodeGenerated(null, "validated", $pdfFile));
             }
             $encadreur = explode(",",$selectedDossier->encadreur_email);
             foreach ($encadreur as $selected1) {
-    
+                $selected1 = trim($selected1);
                 Mail::to($selected1)->send(new CodeGenerated(null, "validated", $pdfFile)); 
             }
         
@@ -214,12 +167,12 @@ class DossierController extends Controller
         $pdfFile = PDF::loadView('email.reviewForm',compact('data'));
         $tab = explode(",",$selectedDossier->chef_email);
         foreach ($tab as $selected) {
-
+            $selected = trim($selected);
             Mail::to($selected)->send(new CodeGenerated($verification_code,"rejected",$pdfFile)); 
         }
         $encadreur = explode(",",$selectedDossier->encadreur_email);
         foreach ($encadreur as $selected1) {
-
+            $selected1 = trim($selected1);
             Mail::to($selected1)->send(new CodeGenerated($verification_code,"rejected",$pdfFile)); 
         }
         
