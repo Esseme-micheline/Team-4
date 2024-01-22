@@ -315,7 +315,7 @@ element.style {
 
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>GestionEtudiant</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Pub</span></strong> from <strong><span>Te-sea Incubator</span></strong>. All Rights Reserved
         </div>
     </footer>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i

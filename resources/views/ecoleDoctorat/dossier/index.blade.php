@@ -13,13 +13,30 @@
         @endif
         <div class="pagetitle">
             <h1>Liste de Thèmes</h1>
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('Admin.index') }}">Admin</a></li>
-                    <li class="breadcrumb-item">Ecole Doctorat</li>
-                    <li class="breadcrumb-item active">Dossier</li>
-                </ol>
-            </nav>
+           <!-- resources/views/components/breadcrumbs.blade.php -->
+
+@php
+$segments = explode('/', request()->path());
+@endphp
+
+<nav>
+<ol class="breadcrumb">
+    @foreach ($segments as $index => $segment)
+        @php
+            $path = implode('/', array_slice($segments, 0, $index + 1));
+        @endphp
+
+        <li class="breadcrumb-item {{ $index === count($segments) - 1 ? 'active' : '' }}">
+            @if ($index === count($segments) - 1)
+                {{ $segment }}
+            @else
+                <a href="{{ url($path) }}">{{ $segment }}</a>
+            @endif
+        </li>
+    @endforeach
+</ol>
+</nav>
+
         </div>
         <section class="section">
             <div class="card">
@@ -59,7 +76,7 @@
                             <a class="nav-link" data-bs-toggle="tab" href="#tab-valider">Dossiers Validés</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#tab-non-valider">Dossiers Non-Validés</a>
+                            <a class="nav-link" data-bs-toggle="tab" href="#tab-non-valider">Dossiers Rejetés</a>
                         </li>
                     </ul>
 
@@ -72,24 +89,69 @@
                                         <th scope="col">#</th>
                                         {{-- <th scope="col">Matricule Du Chef</th> --}}
                                         <th scope="col">Thème</th>
-                                        <th scope="col">Encadreur</th>
-                                        <th scope="col">Année</th>
+                                        <th scope="col">Domaine</th>
+                                        <th scope="col">Date Soumission</th>
                                         <th scope="col">Action</th>
+        
                                     </tr>
                                 </thead>
                                 <tbody id="tbodys">
+                                    
                                     @foreach ($unchecked_projects as $project)
                                     <tr>
-                                        <td>{{ $project->id }}</td>
-                                        {{-- <td>{{$project->chef_matricule}}</td> --}}
-                                        <td>{{$project->theme}}</td>
-                                        <td>{{$project->encadreur_email}}</td>
-                                        <td><?php echo(date('Y', strtotime($project->created_at)))?></td>
                                         <td>
-                                            <a class="btn btn-success" href="{{ route('Ecole_Doctorat.dossier.voir', $project->id) }}">
-                                                <i class="fa-solid fa-folder-open"></i>Voir plus
-                                            </a>
+                                            @php
+                                            
+                                              $databaseId = $project->id;
+                                          
+                                              $code = rand(1000, 9999);
+                                            @endphp
+                                          
+                                            {{ $code }}
+                                          </td>
+                                          
+                                          
+                                        {{-- <td>{{$project->chef_matricule}}</td> --}}
+                                        <td>
+                                            @php
+                                                $theme = $project->theme;
+                                                $maxCharacters = 50; // Définissez le nombre maximum de caractères que vous souhaitez afficher
+                                                echo strlen($theme) > $maxCharacters ? substr($theme, 0, $maxCharacters) . '...' : $theme;
+                                            @endphp
                                         </td>
+                                        
+                                        <td>{{$project->domaine}}</td>
+                                        <td>
+                                            <?php 
+                                                echo date('Y-m-d', strtotime($project->created_at));
+                                                echo '<br>';
+                                                echo date('H:i:s', strtotime($project->created_at));
+                                            ?>
+                                        </td>
+                                        
+
+                                        <td>
+                                            @if ($project->dossierOuvert)
+                                                <a class="btn btn-success" href="{{ route('Ecole_Doctorat.dossier.voir', $project->id) }}">
+                                                    <i class="fa-solid fa-folder-open"></i>
+                                                </a>
+                                            @else
+                                                <a class="btn btn-danger" href="{{ route('Ecole_Doctorat.dossier.voir', $project->id) }}">
+                                                    <i class="fa-solid fa-folder"></i>
+                                                </a>
+                                               
+                                            @endif
+                                            <td>
+                                                <form action="{{ route('Ecole_Doctorat/Dossier/rejeter', $project->id) }}" method="post" style="display: inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir rejeter ce dossier?')">
+                                                        <i class="fa-solid fa-trash"></i> 
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </td>
+                                        
+                                        
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -107,23 +169,49 @@
                                         <th scope="col">#</th>
                                         {{-- <th scope="col">Matricule Du Chef</th> --}}
                                         <th scope="col">Thème</th>
-                                        <th scope="col">Encadreur</th>
+                                        <th scope="col">Domaine</th>
                                         <th scope="col">Vérifié par</th>
-                                        <th scope="col">Année</th>
+                                        <th scope="col">date validation</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbodys">
                                     @foreach($checked_valid as $project)
                                     <tr>
-                                        <td>{{$project->id}}</td>
-                                        {{-- <td>{{$project->chef_matricule}}</td> --}}
-                                        <td>{{$project->theme}}</td>
-                                        <td>{{$project->encadreur_email}}</td>
-                                        <td>{{$project->checked_by}}</td>
-                                        <td><?php echo(date('Y', strtotime($project->created_at)))?></td>
                                         <td>
-                                            <a class="btn btn-success" href="{{ route('Ecole_Doctorat.dossier.voir', $project->id) }}">Revoir</a>
+                                            @php
+                                              
+                                              $databaseId = $project->id;
+                                          
+                                              $code = rand(1000, 9999);
+                                            @endphp
+                                          
+                                            {{ $code }}
+                                          </td>
+                                          
+                                        {{-- <td>{{$project->chef_matricule}}</td> --}}
+                                        <td>
+                                            @php
+                                                $theme = $project->theme;
+                                                $maxCharacters = 50; // Définissez le nombre maximum de caractères que vous souhaitez afficher
+                                                echo strlen($theme) > $maxCharacters ? substr($theme, 0, $maxCharacters) . '...' : $theme;
+                                            @endphp
+                                        </td>
+                                        <td>{{$project->domaine}}</td>
+                                        <td>{{$project->checked_by}}</td>
+                                        <td>
+                                            <?php
+                                            $now = new DateTime();
+                                            echo $now->format('Y-m-d') . '<br>';
+                                            echo $now->format('H:i:s');
+                                            ?>
+                                            
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success" href="{{ route('Ecole_Doctorat.dossier.voir', $project->id) }}">
+                                                <i class="fas fa-edit"></i>
+                                              </a>
+                                              
                                         </td>
                                     </tr>
                                     @endforeach
@@ -142,23 +230,58 @@
                                         <th scope="col">#</th>
                                         {{-- <th scope="col">Matricule Du Chef</th> --}}
                                         <th scope="col">Thème</th>
-                                        <th scope="col">Encadreur</th>
-                                        <th scope="col">Vérifié par</th>
-                                        <th scope="col">Année</th>
+                                        <th scope="col">Domaine</th>
+                                        {{-- <th scope="col">Vérifié par</th> --}}
+                                        <th scope="col">Date Rejet</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbodys">
                                     @foreach($checked_unvalid as $project)
                                     <tr>
-                                        <td>{{$project->id}}</td>
-                                        {{-- <td>{{$project->chef_matricule}}</td> --}}
-                                        <td>{{$project->theme}}</td>
-                                        <td>{{$project->encadreur_email}}</td>
-                                        <td>{{$project->checked_by}}</td>
-                                        <td><?php echo(date('Y', strtotime($project->created_at)))?></td>
                                         <td>
-                                            <a class="btn btn-success" href="{{ route('Ecole_Doctorat.dossier.voir', $project->id) }}">Revoir</a>
+                                            @php
+                                              
+                                              $databaseId = $project->id;
+                                        
+                                              $code = rand(1000, 9999); // the code it generates is not fixed so it changes at everytime
+                                            @endphp
+                                          
+                                            {{ $code }}
+                                          </td>
+                                          
+                                        {{-- <td>{{$project->chef_matricule}}</td> --}}
+                                        <td>
+                                            @php
+                                                $theme = $project->theme;
+                                                $maxCharacters = 50; // Définissez le nombre maximum de caractères que vous souhaitez afficher
+                                                echo strlen($theme) > $maxCharacters ? substr($theme, 0, $maxCharacters) . '...' : $theme;
+                                            @endphp
+                                        </td>
+                                        <td>{{$project->domaine}}</td>
+                                        
+                                        {{-- ?\<td>{{$project->checked_by}}</td> --}}
+                                        <td>
+                                            <?php 
+                                                echo date('Y-m-d', strtotime($project->created_at));
+                                                echo '<br>';
+                                                echo date('H:i:s', strtotime($project->created_at));
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-success" href="{{ route('Ecole_Doctorat.dossier.voir', $project->id) }}">
+                                                <i class="fas fa-edit"></i>
+                                              </a>
+                                              
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('Ecole_Doctorat.Dossier.supprimer', $project->id) }}" method="post" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce dossier?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

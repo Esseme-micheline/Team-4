@@ -32,5 +32,9 @@ class Projets extends Model
      *
      * @var array<string, string>
      */
-
+    
+     protected $fillable = [
+        // Autres propriétés fillable existantes
+        'is_valid',
+    ];
 }

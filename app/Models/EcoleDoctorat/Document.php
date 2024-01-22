@@ -18,4 +18,5 @@ class Document extends Model
     public function dossier(){
         return $this->belongsTo(Dossier::class);
     }
+    
 }

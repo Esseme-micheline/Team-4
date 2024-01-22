@@ -4,7 +4,7 @@
     $typeProjet = config('global.constants.typeProjet');
 ?>
 @section('content')
-<form method="POST" enctype="multipart/form-data"  onsubmit="return validateForm()">
+<form method="POST" action="{{ route('visiteur.store') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
     @csrf
     @if(session('error'))
     <div class="alert alert-danger">
@@ -183,7 +183,7 @@
   </div>
 
 
-<script>
+{{-- <script>
   function validateForm() {
       
       // Validation des adresses e-mail des membres
@@ -220,7 +220,7 @@
       var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(email);
   }
-</script>
+</script> --}}
 
 </form>
 @endsection
