@@ -69,6 +69,8 @@ Route::get('/', [VisiteurController::class, 'index'])->name('visiteur.all');
 Route::get('/project/{projId}', [VisiteurController::class, 'single_project'])->name('visiteur.single');
 Route::get('/soummetre', [VisiteurController::class, 'create'])->name('visiteur.creer');
 Route::post('/soummetre',[VisiteurController::class, 'store'])->name('visiteur.store');
+
+
 Route::get('/soummetre_Finale', [VisiteurController::class, 'createSecond'])->name('visiteur.creerFinale');
 Route::post('/soummetre_Finale', [VisiteurController::class, 'storeSecond'])->name('visiteur.storeFinale');
 Route::get('/download/{projId}/{filePath}',[VisiteurController::class, 'download'])->name('visitor.downloadPdf');
@@ -299,6 +301,11 @@ Route::get('Ecole_Doctorat/Reporting/index', [ReportingController::class, 'index
 Route::get('Ecole_Doctorat/Dossier/index', [DossierController::class, 'index'])->name('Ecole_Doctorat.dossier.index');
 
 Route::get('Ecole_Doctorat/Dossier/voir/{id}', [DossierController::class, 'show'])->name('Ecole_Doctorat.dossier.voir');
+Route::post('/Ecole_Doctorat/Dossier/rejeter/{id}', [DossierController::class, 'rejeterDossier'])->name('Ecole_Doctorat/Dossier/rejeter');
+Route::delete('/Ecole_Doctorat/Dossier/supprimer/{id}', [DossierController::class, 'supprimer'])->name('Ecole_Doctorat.Dossier.supprimer');
+
+
+
 
 //THESE ARE THE TWO FUNCTIONS
 Route::post('Ecole_Doctorat/Dossier/voir/{id}/valider', [DossierController::class, 'valider'])->name('Ecole_Doctorat.dossier.actions.valider');

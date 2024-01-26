@@ -2,6 +2,30 @@
 @section('content')
     @include('layouts.admin.sidebarEcoleDoctorat')
     <main id="main" class="main">
+       <!-- resources/views/components/breadcrumbs.blade.php -->
+
+@php
+$segments = explode('/', request()->path());
+@endphp
+
+<nav>
+<ol class="breadcrumb">
+    @foreach ($segments as $index => $segment)
+        @php
+            $path = implode('/', array_slice($segments, 0, $index + 1));
+        @endphp
+
+        <li class="breadcrumb-item {{ $index === count($segments) - 1 ? 'active' : '' }}">
+            @if ($index === count($segments) - 1)
+                {{ $segment }}
+            @else
+                <a href="{{ url($path) }}">{{ $segment }}</a>
+            @endif
+        </li>
+    @endforeach
+</ol>
+</nav>
+
 <div class="card">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="bologna-list">
